@@ -61,46 +61,87 @@ function DeployContract() {
     };
 
     return (
-        <div>
-            <h1>Create Airdrop</h1>
-            <button style={{ padding: 10, margin: 10 }} onClick={connect}>
-                Connect
-            </button>
+        <div className="flex items-center justify-center min-h-screen bg-black uppercase">
+            {/* Card Container */}
+            <div className="bg-gray-800 text-white rounded-lg shadow-lg p-8 w-full max-w-md">
+                {/* Header */}
+                <h2 className="text-2xl font-bold mb-6 text-center uppercase">Create Airdrop</h2>
 
-            {connected && (
-                <div>
-                    {account && <p>Connected account: {account}</p>}
-                </div>
-            )}
+                {connected && (
+                    <div>
+                        {account && <p className="text-center mb-4">Connected account: {account}</p>}
+                    </div>
+                )}
 
-            {account && (
-                <form onSubmit={handleDeploy}>
-                    <input
-                        type="text"
-                        placeholder="Token Address"
-                        value={tokenAddress}
-                        onChange={(e) => setTokenAddress(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="number"
-                        placeholder="Token Amount"
-                        value={tokenAmount}
-                        onChange={(e) => setTokenAmount(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Initial Owner"
-                        value={initialOwner}
-                        onChange={(e) => setInitialOwner(e.target.value)}
-                        required
-                    />
-                    <button type="submit">Deploy Contract</button>
-                </form>
-            )}
+                {account ? (
+                    <form className="space-y-4" onSubmit={handleDeploy}>
+                        {/* Token Address */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2" htmlFor="tokenAddress">
+                                Token Address
+                            </label>
+                            <input
+                                type="text"
+                                id="tokenAddress"
+                                className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter token address"
+                                value={tokenAddress}
+                                onChange={(e) => setTokenAddress(e.target.value)}
+                                required
+                            />
+                        </div>
 
-            {contractAddress && <p>Contract Address: {contractAddress}</p>}
+                        {/* Token Amount */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2" htmlFor="tokenAmount">
+                                Token Amount
+                            </label>
+                            <input
+                                type="number"
+                                id="tokenAmount"
+                                className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter token amount"
+                                value={tokenAmount}
+                                onChange={(e) => setTokenAmount(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        {/* Initial Owner */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2" htmlFor="initialOwner">
+                                Initial Owner
+                            </label>
+                            <input
+                                type="text"
+                                id="initialOwner"
+                                className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter initial owner"
+                                value={initialOwner}
+                                onChange={(e) => setInitialOwner(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        {/* Airdrop Button */}
+                        <button
+                            type="submit"
+                            className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200 uppercase"
+                        >
+                            Create Airdrop
+                        </button>
+                    </form>
+                ) : (
+                    <button
+                        className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200 uppercase"
+                        onClick={connect}
+                    >
+                        Connect
+                    </button>
+                )}
+
+                {contractAddress && <p className="text-center mt-4">Contract Address: {contractAddress}</p>}
+            </div>
         </div>
     );
 }
