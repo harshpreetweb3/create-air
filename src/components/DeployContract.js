@@ -3,12 +3,11 @@ import { useSDK } from "@metamask/sdk-react";
 import Web3 from 'web3';
 import DropContract from '../contract/Drop.json';  // Ensure this path is correct
 
-function DeployContract() {
+function DeployContract({ setContractAddress }) {
     const [account, setAccount] = useState('');
     const [tokenAddress, setTokenAddress] = useState('');
     const [tokenAmount, setTokenAmount] = useState('');
     const [initialOwner, setInitialOwner] = useState('');
-    const [contractAddress, setContractAddress] = useState('');
 
     const { sdk, connected } = useSDK();
 
@@ -139,8 +138,6 @@ function DeployContract() {
                         Connect
                     </button>
                 )}
-
-                {contractAddress && <p className="text-center mt-4">Contract Address: {contractAddress}</p>}
             </div>
         </div>
     );
